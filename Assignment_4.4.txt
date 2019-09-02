@@ -1,0 +1,39 @@
+1. Use the package RcmdrPlugin.IPSUR.data(RcmdrTestDrive)
+and perform the below operations:
+
+a. Calculate the average salary by gender and smoking status.
+
+Solution:
+
+data("RcmdrTestDrive")
+attach(RcmdrTestDrive)
+names(RcmdrTestDrive)
+str(RcmdrTestDrive)
+
+Method 1:
+x <- tapply(salary, list(gender=gender,smoking=smoking),mean) 
+x
+
+
+Method 2:
+by(salary,RcmdrTestDrive[,c(3,2)],mean,na.rm=TRUE)
+
+
+b. Which gender has the highest mean salary?
+
+Solution:
+Highest mean salary is Male.
+
+c. Report the highest mean salary.
+
+Solution:
+x[which(x==max(x))]
+
+
+d. Compare the spreads for the genders by calculating the standard deviation of salary by gender.
+
+Solution:
+y <- tapply (salary, list(gender = gender), sd) 
+by(salary, gender, sd, na.rm = TRUE)
+
+boxplot(salary~gender, xlab="salary", ylab="gender", main="", notch=FALSE, varwidth=TRUE, horizontal=TRUE, data=RcmdrTestDrive)
